@@ -28,7 +28,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
+      <div className='root'>
       <Buttons />
       <div className="container">
         {this.state.data.map(element => {
@@ -39,7 +39,7 @@ class App extends React.Component {
           searches={element.searches} />
         })}
       </div>
-      </>
+      </div>
     );
   }
 }
