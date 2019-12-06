@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios from "axios";
 import './App.css';
+import DataCard from "./components/DataCard";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state = {
+    data: []
+  }
+
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/api/players')
+      .then(response => {
+        this.setState({data: response.data});
+        console.log(this.state.data);
+        })
+  }
+
+  render() {
+    return (
+      <div className="container">
+        {this.state.data.map(element => {
+          return <DataCard
+          name={element.name}
+          key={element.id}
+          country={element.country}
+          searches={element.searches} />
+        })}
+      </div>
+    );
+  }
 }
 
 export default App;
