@@ -2,9 +2,12 @@ import React from 'react';
 import axios from "axios";
 import './App.css';
 import DataCard from "./components/DataCard";
+import Buttons from "./components/Buttons";
 
 class App extends React.Component {
 
+  // const [darkMode, setDarkMode] = useDarkMode(false);
+  
   state = {
     data: []
   }
@@ -18,8 +21,15 @@ class App extends React.Component {
         })
   }
 
+  toggleMode = e => {
+    e.preventDefault();
+    this.setState({darkMode: !this.state.darkMode});
+  };
+
   render() {
     return (
+      <>
+      <Buttons />
       <div className="container">
         {this.state.data.map(element => {
           return <DataCard
@@ -29,6 +39,7 @@ class App extends React.Component {
           searches={element.searches} />
         })}
       </div>
+      </>
     );
   }
 }
